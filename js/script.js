@@ -72,6 +72,10 @@ playButtonEl.addEventListener("click", function() {
   // se il valore dell'elemento diffulty selector è = easy
   if (difficutlySelectorEl.value == "easy") {
 
+    const bombList = generateRandomNumbersArray(16, 100);
+
+    console.log(bombList)
+
     // faccio un ciclo for che va da 1 a 100
     for (let i = 1; i <= 100; i++) {
   
@@ -80,12 +84,18 @@ playButtonEl.addEventListener("click", function() {
     
       // aggiunto un event listener alla variabile nuovo elemento
       newSquareEl.addEventListener("click", function() {
-    
-        // al click del quadrato
-        // aggiungo la classe light blue per cambiare il background color
-        newSquareEl.classList.add("light-blue");
-        // stampo in console l'inner text del quadrato
-        console.log(newSquareEl.innerText);
+        
+        if (bombList.indexOf(newSquareEl.innerText)) {
+          newSquareEl.classList.add("red");
+
+        } else {
+          
+          // al click del quadrato
+          // aggiungo la classe light blue per cambiare il background color
+          newSquareEl.classList.add("blue");
+          // stampo in console l'inner text del quadrato
+          console.log(newSquareEl.innerText);
+        }
   
       });
 
@@ -174,7 +184,7 @@ function createSquare(text, addClass) {
   newElement.innerText = text;
 
   return newElement;
-}
+};
 
 /**
  * Funzione che genera un numero random compreso tra i due parametri min e max
@@ -193,8 +203,6 @@ function randomNumberBetween(min, max) {
 };
 
 
-
-
 /**
  * Funzione che genera un array (di lunghezza "count") di numeri casuali, tutti diversi tra loro e con valori tra 1 e "max"
  * @param {any} count
@@ -202,10 +210,14 @@ function randomNumberBetween(min, max) {
  * @returns {any}
  */
 function generateRandomNumbersArray(count, max) {
+  // creo un array vuoto
   const randomNumberList = [];
   while (randomNumberList.length < count) {
+    // genero un numero casuale tra 1 e max
     const newRandomNumber = randomNumberBetween(1, max);
+    //controllo se è già presente nell'array
     if (randomNumberList.indexOf(newRandomNumber) == -1) {
+      // SE non è presente, lo pusho
       randomNumberList.push(newRandomNumber);
     }
   }

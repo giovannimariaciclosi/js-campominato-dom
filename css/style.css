@@ -113,8 +113,14 @@ main {
   align-items: center;
 }
 
-.light-blue {
-  background-color: lightblue;
+.blue {
+  background-color: blue;
+  color: white;
+}
+
+.red {
+  background-color: red;
+  color: white;
 }
 /* /main */
 
