@@ -81,7 +81,7 @@ playButtonEl.addEventListener("click", function() {
     //creo un array dove terrò il conto delle volte che ho cliccato delle celle senza bombe
     clickedCellWithNoBombs = [];
 
-    console.log(bombList)
+    console.log(bombList);
 
     // faccio un ciclo for che va da 1 a 100
     for (let i = 1; i <= 100; i++) {
@@ -104,7 +104,7 @@ playButtonEl.addEventListener("click", function() {
           if (!clickedCellWithNoBombs.includes(newSquareEl.innerText)) {
             
             clickedCellWithNoBombs.push(newSquareEl.innerText);
-            console.log(clickedCellWithNoBombs.length);
+            // console.log(clickedCellWithNoBombs.length);
           }
 
           // stampo in console l'inner text del quadrato
@@ -134,7 +134,7 @@ playButtonEl.addEventListener("click", function() {
     //creo un array dove terrò il conto delle volte che ho cliccato delle celle senza bombe
     clickedCellWithNoBombs = [];
 
-    console.log(bombList)
+    console.log(bombList);
 
     // faccio un ciclo for che va da 1 a 81
     for (let i = 1; i <= 81; i++) {
@@ -158,7 +158,7 @@ playButtonEl.addEventListener("click", function() {
           if (!clickedCellWithNoBombs.includes(newSquareEl.innerText)) {
             
             clickedCellWithNoBombs.push(newSquareEl.innerText);
-            console.log(clickedCellWithNoBombs.length);
+            // console.log(clickedCellWithNoBombs.length);
           }
 
           if (clickedCellWithNoBombs.length == 65) {
@@ -180,6 +180,11 @@ playButtonEl.addEventListener("click", function() {
     //creo un array di 16 numeri casuali che vanno da 1 a 49
     const bombList = generateRandomNumbersArray(16, 49);
 
+    //creo un array dove terrò il conto delle volte che ho cliccato delle celle senza bombe
+    clickedCellWithNoBombs = [];
+
+    console.log(bombList);
+
     // faccio un ciclo for che va da 1 a 49
     for (let i = 1; i <= 49; i++) {
     
@@ -188,13 +193,27 @@ playButtonEl.addEventListener("click", function() {
     
       // aggiunto un event listener alla variabile nuovo elemento
       newSquareEl.addEventListener("click", function() {
-    
-        // al click del quadrato
-        // aggiungo la classe light blue per cambiare il background color
-        newSquareEl.classList.add("light-blue");
-        // stampo in console l'inner text del quadrato
-        console.log(newSquareEl.innerText);
-    
+
+        if (bombList.includes(parseInt(newSquareEl.innerText))) {
+          newSquareEl.classList.add("red");
+          console.log(newSquareEl.innerText);
+          gameResultEl.innerText = "Mi dispiace, hai perso, il tuo punteggio è: " + clickedCellWithNoBombs.length;
+        } else {
+
+          newSquareEl.classList.add("blue");
+          // stampo in console l'inner text del quadrato
+          console.log(newSquareEl.innerText);
+
+          if (!clickedCellWithNoBombs.includes(newSquareEl.innerText)) {
+            
+            clickedCellWithNoBombs.push(newSquareEl.innerText);
+            // console.log(clickedCellWithNoBombs.length);
+          }
+
+          if (clickedCellWithNoBombs.length == 33) {
+            gameResultEl.innerText = "Hai vinto, il tuo punteggio è: " + clickedCellWithNoBombs.length;
+          }
+        }    
       });
 
       // cambio il display di grid container da none a flex
