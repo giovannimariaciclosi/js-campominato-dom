@@ -82,6 +82,8 @@ playButtonEl.addEventListener("click", function() {
     clickedCellWithNoBombs = [];
 
     console.log(bombList);
+    //creo una variabile di controllo che controlli se ho cliccato su una bomba
+    let checkBomb = false;
 
     // faccio un ciclo for che va da 1 a 100
     for (let i = 1; i <= 100; i++) {
@@ -286,4 +288,30 @@ function generateRandomNumbersArray(count, max) {
   return randomNumberList;
 };
 
+
+// function isABomb(list1, list2, element1, element2 ) {
+
+//   if (bombList.includes(parseInt(newSquareEl.innerText))) {
+//     newSquareEl.classList.add("red");
+//     console.log(newSquareEl.innerText);
+//     gameResultEl.innerText = "Mi dispiace, hai perso, il tuo punteggio è: " + clickedCellWithNoBombs.length;
+//   } else {
+//     // al click del quadrato
+//     // aggiungo la classe blue per cambiare il background color
+//     newSquareEl.classList.add("blue");
+
+//     if (!clickedCellWithNoBombs.includes(newSquareEl.innerText)) {
+      
+//       clickedCellWithNoBombs.push(newSquareEl.innerText);
+//       // console.log(clickedCellWithNoBombs.length);
+//     }
+
+//     // stampo in console l'inner text del quadrato
+//     console.log(newSquareEl.innerText);
+
+//     if (clickedCellWithNoBombs.length == 84) {
+//       gameResultEl.innerText = "Hai vinto, il tuo punteggio è: " + clickedCellWithNoBombs.length;
+//     }
+//   }
+// }
 
