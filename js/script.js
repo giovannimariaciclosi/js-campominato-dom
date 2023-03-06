@@ -57,6 +57,8 @@ let cellNumber;
 // prendo l'elemento diffculty selector e gli assegno una variabile
 let difficutlySelectorEl = document.getElementById("difficulty-selector");
 
+let gameResultEl = document.getElementById("game-result");
+
 // provo a comprendere come funziona il select / option di html
 // console.log(difficutlySelectorEl);
 // difficutlySelectorEl.addEventListener("click", function() {
@@ -68,11 +70,16 @@ let difficutlySelectorEl = document.getElementById("difficulty-selector");
 playButtonEl.addEventListener("click", function() {
 
   gridContainerEl.innerText = "";
+  gameResultEl.innerText = "";
 
   // se il valore dell'elemento diffulty selector è = easy
   if (difficutlySelectorEl.value == "easy") {
 
+    //creo un array di 16 numeri casuali che vanno da 1 a 100
     const bombList = generateRandomNumbersArray(16, 100);
+
+    //creo un array dove terrò il conto delle volte che ho cliccato delle celle senza bombe
+    clickedCellWithNoBombs = [];
 
     console.log(bombList)
 
@@ -85,16 +92,27 @@ playButtonEl.addEventListener("click", function() {
       // aggiunto un event listener alla variabile nuovo elemento
       newSquareEl.addEventListener("click", function() {
         
-        if (bombList.indexOf(newSquareEl.innerText)) {
+        if (bombList.includes(parseInt(newSquareEl.innerText))) {
           newSquareEl.classList.add("red");
-
+          console.log(newSquareEl.innerText);
+          gameResultEl.innerText = "Mi dispiace, hai perso, il tuo punteggio è: " + clickedCellWithNoBombs.length;
         } else {
-          
           // al click del quadrato
           // aggiungo la classe light blue per cambiare il background color
           newSquareEl.classList.add("blue");
+
+          if (!clickedCellWithNoBombs.includes(newSquareEl.innerText)) {
+            
+            clickedCellWithNoBombs.push(newSquareEl.innerText);
+            console.log(clickedCellWithNoBombs.length);
+          }
+
           // stampo in console l'inner text del quadrato
           console.log(newSquareEl.innerText);
+
+          if (clickedCellWithNoBombs.length == 84) {
+            gameResultEl.innerText = "Hai vinto, il tuo punteggio è: " + clickedCellWithNoBombs.length;
+          }
         }
   
       });
@@ -223,8 +241,5 @@ function generateRandomNumbersArray(count, max) {
   }
   return randomNumberList;
 };
-
-console.log(generateRandomNumbersArray(16, 100));
-
 
 
